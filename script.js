@@ -1,19 +1,16 @@
 // script.js
-document.addEventListener("DOMContentLoaded", () => {
-    // Select form and feedback div
+document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("registration-form");
     const feedbackDiv = document.getElementById("form-feedback");
 
-    // Listen for form submission
-    form.addEventListener("submit", (event) => {
-        event.preventDefault(); // Stop default form submission
+    // Define a validation function
+    function validateForm(event) {
+        event.preventDefault();
 
-        // Retrieve and trim input values
         const username = document.getElementById("username").value.trim();
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
 
-        // Initialize validation tracking
         let isValid = true;
         const messages = [];
 
@@ -40,12 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isValid) {
             feedbackDiv.textContent = "Registration successful!";
-            feedbackDiv.style.color = "#28a745"; // Green for success
+            feedbackDiv.style.color = "#28a745";
             feedbackDiv.style.backgroundColor = "#d4edda";
         } else {
             feedbackDiv.innerHTML = messages.join("<br>");
-            feedbackDiv.style.color = "#d8000c"; // Red for errors
+            feedbackDiv.style.color = "#d8000c";
             feedbackDiv.style.backgroundColor = "#ffbaba";
         }
-    });
+    }
+
+    // Attach the function to the form submit event
+    form.addEventListener("submit", validateForm);
 });
